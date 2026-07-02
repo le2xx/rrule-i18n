@@ -39,6 +39,17 @@ const INTENTIONAL_DIFFERENCES: Record<string, string> = {
   // rrule has no notion of combining two differently-positioned weekday
   // shorthands into one sentence the way we do.
   'FREQ=MONTHLY;BYDAY=1MO,-1FR': 'every month on the 1st Monday and last Friday',
+  // Same "spell it out" style choice as BYMONTHDAY=-1/-2 above, now hit via
+  // a mixed positive+negative / 3+ fragment BYMONTHDAY list.
+  'FREQ=MONTHLY;BYMONTHDAY=1,-1': 'every month on the 1st and last',
+  'FREQ=MONTHLY;BYMONTHDAY=15,-1,-2': 'every month on the 15th, last and 2nd last',
+  // Same "on weekdays" vs. "every weekday" idiom as FREQ=DAILY above, now
+  // hit via FREQ=WEEKLY -- the collapse in weekdaysPhrase() applies to both.
+  'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR': 'every weekday',
+  // Same "always include the ordinal" gap as BYDAY+BYSETPOS above, now hit
+  // via multiple BYSETPOS x multiple BYDAY (a 3x3 cross product) -- rrule
+  // drops all the ordinals and every weekday collapses into one plain list.
+  'FREQ=MONTHLY;BYDAY=MO,WE,FR;BYSETPOS=1,2,-1': 'every month on Monday, Wednesday, Friday',
 };
 
 const lowerFirst = (text: string): string => {

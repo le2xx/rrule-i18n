@@ -139,7 +139,11 @@ export const ruLocale: RRuleLocale = {
     } else {
       ordinal = `${pos}-${ruNumeralOrdinalSuffix(gender)}`;
     }
-    return `в ${ordinal} ${weekdayAccusative(weekday)}`;
+    // "в" becomes "во" before a word starting with a в/ф + consonant cluster
+    // (e.g. "во вторник") -- of the words used here, only "второй/вторую/
+    // второе" (position 2) ever triggers this.
+    const preposition = ordinal.startsWith('вт') ? 'во' : 'в';
+    return `${preposition} ${ordinal} ${weekdayAccusative(weekday)}`;
   },
 
   monthsPhrase(months) {
@@ -164,7 +168,7 @@ export const ruLocale: RRuleLocale = {
       if (d === -1) fragments.push('в последний день месяца');
       else fragments.push(`${Math.abs(d)}-й день с конца месяца`);
     }
-    return fragments.join(' и ');
+    return joinWithConjunction(fragments, 'и');
   },
 
   until(date: Date, dateFormatter: RRuleDateFormatter) {

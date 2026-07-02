@@ -1,6 +1,7 @@
 import { RRuleTextError } from './errors';
 import { normalize, type NormalizedRule, type WeekdaySpec } from './normalize';
 import { enLocale } from './locales/en';
+import { joinWithConjunction } from './locales/shared';
 import type { RRuleDateFormatter, RRuleLike, RRuleLocale, RRuleTextOptions } from './types';
 
 export type {
@@ -102,7 +103,8 @@ const buildWeekdayClause = (specs: WeekdaySpec[], locale: RRuleLocale): string =
     return locale.weekdaysPhrase(days);
   }
   const conjunction = LIST_CONJUNCTION[locale.code] ?? 'and';
-  return specs.map((s) => locale.nthWeekdayPhrase(s.n!, s.weekday)).join(` ${conjunction} `);
+  const fragments = specs.map((s) => locale.nthWeekdayPhrase(s.n!, s.weekday));
+  return joinWithConjunction(fragments, conjunction);
 };
 
 const buildSentence = (rule: NormalizedRule, locale: RRuleLocale): string => {

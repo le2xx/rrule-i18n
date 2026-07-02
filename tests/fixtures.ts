@@ -360,4 +360,440 @@ export const fixtures: Fixture[] = [
     locale: 'ru',
     expected: 'В марте и апреле по понедельникам',
   },
+
+  // ---- All 12 months, prepositional case (ru) ----
+  { name: 'month Jan (ru)', rule: 'FREQ=YEARLY;BYMONTH=1', locale: 'ru', expected: 'В январе' },
+  { name: 'month Feb (ru)', rule: 'FREQ=YEARLY;BYMONTH=2', locale: 'ru', expected: 'В феврале' },
+  { name: 'month Mar (ru)', rule: 'FREQ=YEARLY;BYMONTH=3', locale: 'ru', expected: 'В марте' },
+  { name: 'month Apr (ru)', rule: 'FREQ=YEARLY;BYMONTH=4', locale: 'ru', expected: 'В апреле' },
+  { name: 'month May (ru)', rule: 'FREQ=YEARLY;BYMONTH=5', locale: 'ru', expected: 'В мае' },
+  { name: 'month Jun (ru)', rule: 'FREQ=YEARLY;BYMONTH=6', locale: 'ru', expected: 'В июне' },
+  { name: 'month Jul (ru)', rule: 'FREQ=YEARLY;BYMONTH=7', locale: 'ru', expected: 'В июле' },
+  { name: 'month Aug (ru)', rule: 'FREQ=YEARLY;BYMONTH=8', locale: 'ru', expected: 'В августе' },
+  { name: 'month Sep (ru)', rule: 'FREQ=YEARLY;BYMONTH=9', locale: 'ru', expected: 'В сентябре' },
+  { name: 'month Oct (ru)', rule: 'FREQ=YEARLY;BYMONTH=10', locale: 'ru', expected: 'В октябре' },
+  { name: 'month Nov (ru)', rule: 'FREQ=YEARLY;BYMONTH=11', locale: 'ru', expected: 'В ноябре' },
+  { name: 'month Dec (ru)', rule: 'FREQ=YEARLY;BYMONTH=12', locale: 'ru', expected: 'В декабре' },
+
+  // ---- All 7 weekdays individually, dative plural (ru); Monday already
+  // covered above ("weekly one weekday (ru)") ----
+  {
+    name: 'weekday Tuesday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=TU',
+    locale: 'ru',
+    expected: 'Каждую неделю по вторникам',
+  },
+  {
+    name: 'weekday Wednesday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=WE',
+    locale: 'ru',
+    expected: 'Каждую неделю по средам',
+  },
+  {
+    name: 'weekday Thursday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=TH',
+    locale: 'ru',
+    expected: 'Каждую неделю по четвергам',
+  },
+  {
+    name: 'weekday Friday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=FR',
+    locale: 'ru',
+    expected: 'Каждую неделю по пятницам',
+  },
+  {
+    name: 'weekday Saturday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=SA',
+    locale: 'ru',
+    expected: 'Каждую неделю по субботам',
+  },
+  {
+    name: 'weekday Sunday alone (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=SU',
+    locale: 'ru',
+    expected: 'Каждую неделю по воскресеньям',
+  },
+
+  // ---- Nth-weekday ordinal positions 2-5, one representative per gender
+  // (masculine/feminine/neuter) -- position 1 is already covered above for
+  // all 7 weekdays. Position 2 (masculine/feminine/neuter) specifically
+  // regression-tests the "в" -> "во" preposition shift before "второй/
+  // вторую/второе" ("во второй", not "в второй"). ----
+  {
+    name: 'nth weekday 2nd, masculine -- "во", not "в" (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=TU;BYSETPOS=2',
+    locale: 'ru',
+    expected: 'Каждый месяц во второй вторник',
+  },
+  {
+    name: 'nth weekday 2nd, feminine -- "во", not "в" (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=FR;BYSETPOS=2',
+    locale: 'ru',
+    expected: 'Каждый месяц во вторую пятницу',
+  },
+  {
+    name: 'nth weekday 2nd, neuter -- "во", not "в" (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SU;BYSETPOS=2',
+    locale: 'ru',
+    expected: 'Каждый месяц во второе воскресенье',
+  },
+  {
+    name: 'nth weekday 3rd, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=MO;BYSETPOS=3',
+    locale: 'ru',
+    expected: 'Каждый месяц в третий понедельник',
+  },
+  {
+    name: 'nth weekday 3rd, feminine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=WE;BYSETPOS=3',
+    locale: 'ru',
+    expected: 'Каждый месяц в третью среду',
+  },
+  {
+    name: 'nth weekday 3rd, neuter (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SU;BYSETPOS=3',
+    locale: 'ru',
+    expected: 'Каждый месяц в третье воскресенье',
+  },
+  {
+    name: 'nth weekday 4th, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=TH;BYSETPOS=4',
+    locale: 'ru',
+    expected: 'Каждый месяц в четвёртый четверг',
+  },
+  {
+    name: 'nth weekday 4th, feminine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SA;BYSETPOS=4',
+    locale: 'ru',
+    expected: 'Каждый месяц в четвёртую субботу',
+  },
+  {
+    name: 'nth weekday 4th, neuter (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SU;BYSETPOS=4',
+    locale: 'ru',
+    expected: 'Каждый месяц в четвёртое воскресенье',
+  },
+  {
+    name: 'nth weekday 5th, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=MO;BYSETPOS=5',
+    locale: 'ru',
+    expected: 'Каждый месяц в пятый понедельник',
+  },
+  {
+    name: 'nth weekday 5th, feminine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=FR;BYSETPOS=5',
+    locale: 'ru',
+    expected: 'Каждый месяц в пятую пятницу',
+  },
+  {
+    name: 'nth weekday 5th, neuter (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SU;BYSETPOS=5',
+    locale: 'ru',
+    expected: 'Каждый месяц в пятое воскресенье',
+  },
+
+  // ---- Negative nth-weekday positions across genders. -1 feminine and -2
+  // masculine/feminine are already covered above/in rrule-to-text.test.ts. ----
+  {
+    name: 'nth weekday last, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=-1MO',
+    locale: 'ru',
+    expected: 'Каждый месяц в последний понедельник',
+  },
+  {
+    name: 'nth weekday last, neuter (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=-1SU',
+    locale: 'ru',
+    expected: 'Каждый месяц в последнее воскресенье',
+  },
+  {
+    name: 'nth weekday 3rd-to-last, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=TU;BYSETPOS=-3',
+    locale: 'ru',
+    expected: 'Каждый месяц в 3-й с конца вторник',
+  },
+  {
+    name: 'nth weekday 3rd-to-last, feminine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=WE;BYSETPOS=-3',
+    locale: 'ru',
+    expected: 'Каждый месяц в 3-я с конца среду',
+  },
+  {
+    name: 'nth weekday 3rd-to-last, neuter (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SU;BYSETPOS=-3',
+    locale: 'ru',
+    expected: 'Каждый месяц в 3-е с конца воскресенье',
+  },
+  {
+    name: 'nth weekday 4th-to-last, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=TH;BYSETPOS=-4',
+    locale: 'ru',
+    expected: 'Каждый месяц в 4-й с конца четверг',
+  },
+  {
+    name: 'nth weekday 4th-to-last, feminine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=SA;BYSETPOS=-4',
+    locale: 'ru',
+    expected: 'Каждый месяц в 4-я с конца субботу',
+  },
+  {
+    name: 'nth weekday 5th-to-last, masculine (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=MO;BYSETPOS=-5',
+    locale: 'ru',
+    expected: 'Каждый месяц в 5-й с конца понедельник',
+  },
+
+  // ---- Numeral agreement (one/few/many) for every FREQ unit other than
+  // "day", which is already exhaustively covered above. 2 -> few, 5 -> many,
+  // 11 -> many (the "teens" exception), 21 -> one. ----
+  {
+    name: 'year interval 2, few -> "года" (ru)',
+    rule: 'FREQ=YEARLY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 года',
+  },
+  {
+    name: 'year interval 5, many -> "лет" (ru)',
+    rule: 'FREQ=YEARLY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 лет',
+  },
+  {
+    name: 'year interval 11, many (teens exception) -> "лет" (ru)',
+    rule: 'FREQ=YEARLY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 лет',
+  },
+  {
+    name: 'year interval 21, one -> "год" (ru)',
+    rule: 'FREQ=YEARLY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 год',
+  },
+  {
+    name: 'month interval 2, few -> "месяца" (ru)',
+    rule: 'FREQ=MONTHLY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 месяца',
+  },
+  {
+    name: 'month interval 5, many -> "месяцев" (ru)',
+    rule: 'FREQ=MONTHLY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 месяцев',
+  },
+  {
+    name: 'month interval 11, many (teens exception) -> "месяцев" (ru)',
+    rule: 'FREQ=MONTHLY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 месяцев',
+  },
+  {
+    name: 'month interval 21, one -> "месяц" (ru)',
+    rule: 'FREQ=MONTHLY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 месяц',
+  },
+  {
+    name: 'week interval 2, few -> "недели" (ru)',
+    rule: 'FREQ=WEEKLY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 недели',
+  },
+  {
+    name: 'week interval 5, many -> "недель" (ru)',
+    rule: 'FREQ=WEEKLY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 недель',
+  },
+  {
+    name: 'week interval 11, many (teens exception) -> "недель" (ru)',
+    rule: 'FREQ=WEEKLY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 недель',
+  },
+  {
+    name: 'week interval 21, one -> "неделя" (ru)',
+    rule: 'FREQ=WEEKLY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 неделя',
+  },
+  {
+    name: 'hour interval 2, few -> "часа" (ru)',
+    rule: 'FREQ=HOURLY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 часа',
+  },
+  {
+    name: 'hour interval 5, many -> "часов" (ru)',
+    rule: 'FREQ=HOURLY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 часов',
+  },
+  {
+    name: 'hour interval 11, many (teens exception) -> "часов" (ru)',
+    rule: 'FREQ=HOURLY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 часов',
+  },
+  {
+    name: 'hour interval 21, one -> "час" (ru)',
+    rule: 'FREQ=HOURLY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 час',
+  },
+  {
+    name: 'minute interval 2, few -> "минуты" (ru)',
+    rule: 'FREQ=MINUTELY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 минуты',
+  },
+  {
+    name: 'minute interval 5, many -> "минут" (ru)',
+    rule: 'FREQ=MINUTELY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 минут',
+  },
+  {
+    name: 'minute interval 11, many (teens exception) -> "минут" (ru)',
+    rule: 'FREQ=MINUTELY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 минут',
+  },
+  {
+    name: 'minute interval 21, one -> "минута" (ru)',
+    rule: 'FREQ=MINUTELY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 минута',
+  },
+  {
+    name: 'second interval 2, few -> "секунды" (ru)',
+    rule: 'FREQ=SECONDLY;INTERVAL=2',
+    locale: 'ru',
+    expected: 'Каждые 2 секунды',
+  },
+  {
+    name: 'second interval 5, many -> "секунд" (ru)',
+    rule: 'FREQ=SECONDLY;INTERVAL=5',
+    locale: 'ru',
+    expected: 'Каждые 5 секунд',
+  },
+  {
+    name: 'second interval 11, many (teens exception) -> "секунд" (ru)',
+    rule: 'FREQ=SECONDLY;INTERVAL=11',
+    locale: 'ru',
+    expected: 'Каждые 11 секунд',
+  },
+  {
+    name: 'second interval 21, one -> "секунда" (ru)',
+    rule: 'FREQ=SECONDLY;INTERVAL=21',
+    locale: 'ru',
+    expected: 'Каждые 21 секунда',
+  },
+
+  // ---- BYMONTHDAY: mixed positive+negative, and 3+ fragments (regression-
+  // tests the natural "a, b и c" / "a, b and c" join added for 3+ fragments,
+  // instead of a monotonous repeated "и"/"and") ----
+  {
+    name: 'monthday mixed positive + last day (en)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=1,-1',
+    locale: 'en',
+    expected: 'Every month on the 1st and on the last day of the month',
+  },
+  {
+    name: 'monthday mixed positive + last day (ru)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=1,-1',
+    locale: 'ru',
+    expected: 'Каждый месяц 1-го числа и в последний день месяца',
+  },
+  {
+    name: 'monthday 3rd-to-last, standalone (ru)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=-3',
+    locale: 'ru',
+    expected: 'Каждый месяц 3-й день с конца месяца',
+  },
+  {
+    name: 'monthday 3 fragments, natural "a, b и c" join (ru)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=15,-1,-2',
+    locale: 'ru',
+    expected: 'Каждый месяц 15-го числа, в последний день месяца и 2-й день с конца месяца',
+  },
+  {
+    name: 'monthday 3 negative fragments, natural "a, b и c" join (ru)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=-1,-2,-3',
+    locale: 'ru',
+    expected:
+      'Каждый месяц в последний день месяца, 2-й день с конца месяца и 3-й день с конца месяца',
+  },
+  {
+    name: 'monthday 3 fragments, natural "a, b and c" join (en)',
+    rule: 'FREQ=MONTHLY;BYMONTHDAY=15,-1,-2',
+    locale: 'en',
+    expected:
+      'Every month on the 15th, on the last day of the month and on the 2nd-to-last day of the month',
+  },
+
+  // ---- WEEKLY + full business week collapses to the "weekdays" idiom the
+  // same way DAILY does. This idiom collapse lives in weekdaysPhrase() and
+  // applies regardless of INTERVAL; only the *frequency phrase* itself
+  // ("Every week" / "Каждую неделю") is additionally omitted when
+  // interval === 1, since with interval !== 1 it's still needed to convey
+  // the "every Nth week" part. ----
+  {
+    name: 'weekly full business week collapses to "on weekdays" (en)',
+    rule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
+    locale: 'en',
+    expected: 'On weekdays',
+  },
+  {
+    name: 'weekly full business week collapses to "По будням" (ru)',
+    rule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
+    locale: 'ru',
+    expected: 'По будням',
+  },
+  {
+    name: 'weekly interval=2 + business week still uses the "weekdays" idiom, frequency phrase kept (en)',
+    rule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,TU,WE,TH,FR',
+    locale: 'en',
+    expected: 'Every 2 weeks on weekdays',
+  },
+  {
+    name: 'weekly interval=2 + business week still uses the "по будням" idiom, frequency phrase kept (ru)',
+    rule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,TU,WE,TH,FR',
+    locale: 'ru',
+    expected: 'Каждые 2 недели по будням',
+  },
+
+  // ---- BYYEARDAY / BYWEEKNO exact approximate-match wording (ru) ----
+  {
+    name: 'BYYEARDAY exact approximate-match wording (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,100',
+    locale: 'ru',
+    expected: 'Каждый год (~ приблизительно)',
+  },
+  {
+    name: 'BYWEEKNO exact approximate-match wording (ru)',
+    rule: 'FREQ=MONTHLY;BYWEEKNO=1',
+    locale: 'ru',
+    expected: 'Каждый месяц (~ приблизительно)',
+  },
+
+  // ---- 3+ nth-weekday fragments (multiple BYSETPOS x multiple BYDAY):
+  // regression-tests the natural "a, b и c" / "a, b and c" join added to
+  // buildWeekdayClause() in the core engine, instead of a monotonous
+  // repeated "и"/"and" between every fragment. ----
+  {
+    name: 'nth weekday 3x3 cross product, natural "a, b and c" join (en)',
+    rule: 'FREQ=MONTHLY;BYDAY=MO,WE,FR;BYSETPOS=1,2,-1',
+    locale: 'en',
+    expected:
+      'Every month on the 1st Monday, on the 1st Wednesday, on the 1st Friday, on the 2nd Monday, on the 2nd Wednesday, on the 2nd Friday, on the last Monday, on the last Wednesday and on the last Friday',
+  },
+  {
+    name: 'nth weekday 3x3 cross product, natural "a, b и c" join (ru)',
+    rule: 'FREQ=MONTHLY;BYDAY=MO,WE,FR;BYSETPOS=1,2,-1',
+    locale: 'ru',
+    expected:
+      'Каждый месяц в первый понедельник, в первую среду, в первую пятницу, во второй понедельник, во вторую среду, во вторую пятницу, в последний понедельник, в последнюю среду и в последнюю пятницу',
+  },
 ];

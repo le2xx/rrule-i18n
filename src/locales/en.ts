@@ -92,7 +92,7 @@ export const enLocale: RRuleLocale = {
       if (d === -1) fragments.push('on the last day of the month');
       else fragments.push(`on the ${ordinalEn(Math.abs(d))}-to-last day of the month`);
     }
-    return fragments.join(' and ');
+    return joinWithConjunction(fragments, 'and');
   },
 
   until(date: Date, dateFormatter: RRuleDateFormatter) {
