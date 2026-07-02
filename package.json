@@ -1,0 +1,92 @@
+{
+  "name": "rrule-i18n",
+  "version": "0.1.0",
+  "description": "Turn a parsed RRULE (RFC 5545) into grammatically correct, human-readable text in multiple languages.",
+  "keywords": [
+    "rrule",
+    "rfc5545",
+    "recurrence",
+    "i18n",
+    "l10n",
+    "localization",
+    "internationalization",
+    "cron",
+    "recurring-events",
+    "icalendar"
+  ],
+  "license": "MIT",
+  "author": "Alex",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./locales/en": {
+      "import": {
+        "types": "./dist/locales/en.d.mts",
+        "default": "./dist/locales/en.mjs"
+      },
+      "require": {
+        "types": "./dist/locales/en.d.cts",
+        "default": "./dist/locales/en.cjs"
+      }
+    },
+    "./locales/ru": {
+      "import": {
+        "types": "./dist/locales/ru.d.mts",
+        "default": "./dist/locales/ru.mjs"
+      },
+      "require": {
+        "types": "./dist/locales/ru.d.cts",
+        "default": "./dist/locales/ru.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "peerDependencies": {
+    "rrule": "^2.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/eslint-plugin": "^1.6.20",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.4",
+    "rrule": "^2.8.1",
+    "tsdown": "^0.22.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^4.1.9"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
