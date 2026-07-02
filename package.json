@@ -1,7 +1,15 @@
 {
   "name": "rrule-i18n",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn a parsed RRULE (RFC 5545) into grammatically correct, human-readable text in multiple languages.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/le2xx/rrule-i18n.git"
+  },
+  "bugs": {
+    "url": "https://github.com/le2xx/rrule-i18n/issues"
+  },
+  "homepage": "https://github.com/le2xx/rrule-i18n#readme",
   "keywords": [
     "rrule",
     "rfc5545",
