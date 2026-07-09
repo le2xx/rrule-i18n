@@ -1,0 +1,34 @@
+name: Feature request
+description: New locale, new RRULE field support, or an API change
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New locale
+        - Support for an unsupported RRULE field
+        - API / DX improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What do you want, and why isn't the current behavior enough?
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example
+      description: For a new locale, a few input/output pairs are the fastest way to communicate the grammar rules involved.
+      placeholder: |
+        FREQ=DAILY -> "..."
+        FREQ=WEEKLY;BYDAY=MO,WE,FR -> "..."
+    validations:
+      required: false

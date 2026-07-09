@@ -1,0 +1,50 @@
+name: Bug report
+description: Something produces incorrect or unexpected text
+labels: [bug]
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: RRULE input
+      description: The RRULE string or options object you passed in
+      placeholder: "FREQ=MONTHLY;BYDAY=MO;BYSETPOS=1"
+    validations:
+      required: true
+
+  - type: input
+    id: locale
+    attributes:
+      label: Locale
+      placeholder: "ru"
+    validations:
+      required: true
+
+  - type: input
+    id: expected
+    attributes:
+      label: Expected output
+    validations:
+      required: true
+
+  - type: input
+    id: actual
+    attributes:
+      label: Actual output
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: rrule-i18n version
+      placeholder: "0.1.1"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Node version, how you're calling it, minimal repro, etc.
+    validations:
+      required: false
