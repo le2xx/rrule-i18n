@@ -1,5 +1,11 @@
 # rrule-i18n
 
+[![npm version](https://img.shields.io/npm/v/rrule-i18n)](https://www.npmjs.com/package/rrule-i18n)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/rrule-i18n)](https://bundlephobia.com/package/rrule-i18n)
+[![coverage](https://codecov.io/gh/le2xx/rrule-i18n/branch/main/graph/badge.svg)](https://codecov.io/gh/le2xx/rrule-i18n)
+[![CI](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml/badge.svg)](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/rrule-i18n)](./LICENSE)
+
 Turn a parsed [RFC 5545](https://icalendar.org/iCalendar-RFC-5545/3-3-10-recurrence-rule.html) recurrence rule (`FREQ=...;INTERVAL=...`) into grammatically correct, human-readable text in multiple languages.
 
 ```ts
