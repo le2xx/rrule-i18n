@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/rrule-i18n)](https://www.npmjs.com/package/rrule-i18n)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/rrule-i18n)](https://bundlephobia.com/package/rrule-i18n)
 [![coverage](https://codecov.io/gh/le2xx/rrule-i18n/branch/main/graph/badge.svg)](https://codecov.io/gh/le2xx/rrule-i18n)
-[![CI](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml/badge.svg)](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml)
+[![CI](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/le2xx/rrule-i18n/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/rrule-i18n)](./LICENSE)
 
 Turn a parsed [RFC 5545](https://icalendar.org/iCalendar-RFC-5545/3-3-10-recurrence-rule.html) recurrence rule (`FREQ=...;INTERVAL=...`) into grammatically correct, human-readable text in multiple languages.
@@ -133,39 +133,39 @@ The core engine (`rrule-i18n`'s main entry) has no language-specific text anywhe
 
 1. **Create `src/locales/<code>.ts`** implementing the `RRuleLocale` interface:
 
-   ```ts
-   import type { RRuleLocale } from 'rrule-i18n';
+```ts
+import type { RRuleLocale } from 'rrule-i18n';
 
-   export const myLocale: RRuleLocale = {
-     code: 'xx',
-     frequencyPhrase(freq, interval) {
-       /* "every day" / "every 2 days" */
-     },
-     weekdaysPhrase(days) {
-       /* "on Monday, Wednesday and Friday"; special-case the full Mon-Fri set */
-     },
-     nthWeekdayPhrase(pos, weekday) {
-       /* "on the first Monday", agreement is this method's job */
-     },
-     monthsPhrase(months) {
-       /* "in January and June" */
-     },
-     monthdaysPhrase(days) {
-       /* "on the 1st and 15th" / "on the last day of the month" */
-     },
-     until(date, dateFormatter) {
-       /* "until " + dateFormatter(date, 'xx') */
-     },
-     count(n) {
-       /* "for 10 times" */
-     },
-     join(parts) {
-       /* combine the non-null clause fragments into one sentence */
-     },
-   };
-   ```
+export const myLocale: RRuleLocale = {
+  code: 'xx',
+  frequencyPhrase(freq, interval) {
+    /* "every day" / "every 2 days" */
+  },
+  weekdaysPhrase(days) {
+    /* "on Monday, Wednesday and Friday"; special-case the full Mon-Fri set */
+  },
+  nthWeekdayPhrase(pos, weekday) {
+    /* "on the first Monday", agreement is this method's job */
+  },
+  monthsPhrase(months) {
+    /* "in January and June" */
+  },
+  monthdaysPhrase(days) {
+    /* "on the 1st and 15th" / "on the last day of the month" */
+  },
+  until(date, dateFormatter) {
+    /* "until " + dateFormatter(date, 'xx') */
+  },
+  count(n) {
+    /* "for 10 times" */
+  },
+  join(parts) {
+    /* combine the non-null clause fragments into one sentence */
+  },
+};
+```
 
-   Each method must return a **complete, already-agreeing phrase fragment** (including whatever preposition or case ending your language needs) -- never a bare word meant to be substituted into a fixed template. That's the whole point: the core engine calls these methods and concatenates their results via `join()`, it never touches individual words.
+Each method must return a **complete, already-agreeing phrase fragment** (including whatever preposition or case ending your language needs) -- never a bare word meant to be substituted into a fixed template. That's the whole point: the core engine calls these methods and concatenates their results via `join()`, it never touches individual words.
 
 2. **Register it**, either by consumers calling `registerLocale(myLocale)` themselves, or by publishing it at its own subpath the same way `ru` is (`rrule-i18n/locales/xx`) if you're contributing it back to this package -- add one entry to the `exports` map in `package.json` and one entry to `tsdown.config.ts`'s `entry` map. The core package (`src/index.ts`) is never modified.
 
