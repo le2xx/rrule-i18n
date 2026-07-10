@@ -120,8 +120,8 @@ All seven `FREQ` values (`YEARLY`, `MONTHLY`, `WEEKLY`, `DAILY`, `HOURLY`, `MINU
 - `BYDAY`, including numeric-prefixed shorthand (`1MO`, `-1FR`) and the general `BYDAY` + `BYSETPOS` form ("the Nth weekday")
 - `BYMONTHDAY`, including negative values ("the Nth-to-last day of the month")
 - `BYMONTH`
-- `WKST` (accepted, currently has no effect on the generated text)
-- `BYYEARDAY` / `BYWEEKNO`: not translated in detail -- the generated text is appended with an approximate-match note (e.g. `"(~ approximately)"`) rather than silently dropping the constraint.
+- `WKST` (accepted, but intentionally has no effect on the generated text -- it only affects which dates an occurrence falls on when `INTERVAL > 1`, not how the rule reads in prose; no calendar UI narrates it either)
+- `BYYEARDAY` (day-of-year, including negative/from-end-of-year values) and `BYWEEKNO` (ISO week-of-year, including negative values).
 
 ## The Angular pipe adapter
 

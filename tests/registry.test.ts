@@ -14,6 +14,8 @@ const xxLocale: RRuleLocale = {
   nthWeekdayPhrase: (pos, weekday) => `XX-NTH-${pos}-${weekday}`,
   monthsPhrase: (months) => `XX-MONTHS-${months.join('.')}`,
   monthdaysPhrase: (days) => `XX-MONTHDAYS-${days.join('.')}`,
+  byyeardayPhrase: (days) => `XX-YEARDAYS-${days.join('.')}`,
+  byweeknoPhrase: (weeks) => `XX-WEEKNOS-${weeks.join('.')}`,
   until: (date, formatter) => `XX-UNTIL-${formatter(date, 'xx')}`,
   count: (n) => `XX-COUNT-${n}`,
   join: (parts) => parts.filter((p): p is string => !!p).join(' | '),

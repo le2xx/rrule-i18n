@@ -764,18 +764,205 @@ export const fixtures: Fixture[] = [
     expected: 'Каждые 2 недели по будням',
   },
 
-  // ---- BYYEARDAY / BYWEEKNO exact approximate-match wording (ru) ----
+  // ---- BYYEARDAY: single/multiple positive, -1, other negative, mixed (en+ru) ----
   {
-    name: 'BYYEARDAY exact approximate-match wording (ru)',
-    rule: 'FREQ=YEARLY;BYYEARDAY=1,100',
-    locale: 'ru',
-    expected: 'Каждый год (~ приблизительно)',
+    name: 'BYYEARDAY single positive day (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1',
+    locale: 'en',
+    expected: 'Every year on the 1st day of the year',
   },
   {
-    name: 'BYWEEKNO exact approximate-match wording (ru)',
+    name: 'BYYEARDAY single positive day (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1',
+    locale: 'ru',
+    expected: 'Каждый год 1-го дня года',
+  },
+  {
+    name: 'BYYEARDAY multiple positive days (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,100',
+    locale: 'en',
+    expected: 'Every year on the 1st and 100th day of the year',
+  },
+  {
+    name: 'BYYEARDAY multiple positive days (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,100',
+    locale: 'ru',
+    expected: 'Каждый год 1-го и 100-го дня года',
+  },
+  {
+    name: 'BYYEARDAY=-1 last day of the year (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-1',
+    locale: 'en',
+    expected: 'Every year on the last day of the year',
+  },
+  {
+    name: 'BYYEARDAY=-1 last day of the year (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-1',
+    locale: 'ru',
+    expected: 'Каждый год в последний день года',
+  },
+  {
+    name: 'BYYEARDAY other negative, Nth-to-last (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-5',
+    locale: 'en',
+    expected: 'Every year on the 5th-to-last day of the year',
+  },
+  {
+    name: 'BYYEARDAY other negative, Nth-to-last (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-5',
+    locale: 'ru',
+    expected: 'Каждый год 5-й день с конца года',
+  },
+  {
+    name: 'BYYEARDAY three positive days, exercises the 3+-item join branch (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,50,100',
+    locale: 'en',
+    expected: 'Every year on the 1st, 50th and 100th day of the year',
+  },
+  {
+    name: 'BYYEARDAY three positive days, exercises the 3+-item join branch (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,50,100',
+    locale: 'ru',
+    expected: 'Каждый год 1-го, 50-го и 100-го дня года',
+  },
+  {
+    name: 'BYYEARDAY multiple negative days, exercises the sort comparator (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-1,-5',
+    locale: 'en',
+    expected: 'Every year on the last day of the year and on the 5th-to-last day of the year',
+  },
+  {
+    name: 'BYYEARDAY multiple negative days, exercises the sort comparator (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=-1,-5',
+    locale: 'ru',
+    expected: 'Каждый год в последний день года и 5-й день с конца года',
+  },
+  {
+    name: 'BYYEARDAY mixed positive and negative (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,-1',
+    locale: 'en',
+    expected: 'Every year on the 1st day of the year and on the last day of the year',
+  },
+  {
+    name: 'BYYEARDAY mixed positive and negative (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1,-1',
+    locale: 'ru',
+    expected: 'Каждый год 1-го дня года и в последний день года',
+  },
+
+  // ---- BYWEEKNO: single/multiple positive, -1, other negative (en+ru) ----
+  {
+    name: 'BYWEEKNO single positive week (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1',
+    locale: 'en',
+    expected: 'Every year in the 1st week of the year',
+  },
+  {
+    name: 'BYWEEKNO single positive week (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1',
+    locale: 'ru',
+    expected: 'Каждый год на 1-й неделе года',
+  },
+  {
+    name: 'BYWEEKNO multiple positive weeks (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1,26',
+    locale: 'en',
+    expected: 'Every year in the 1st and 26th week of the year',
+  },
+  {
+    name: 'BYWEEKNO multiple positive weeks (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1,26',
+    locale: 'ru',
+    expected: 'Каждый год на 1-й и 26-й неделе года',
+  },
+  {
+    name: 'BYWEEKNO=-1 last week of the year (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-1',
+    locale: 'en',
+    expected: 'Every year in the last week of the year',
+  },
+  {
+    name: 'BYWEEKNO=-1 last week of the year (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-1',
+    locale: 'ru',
+    expected: 'Каждый год на последней неделе года',
+  },
+  {
+    name: 'BYWEEKNO other negative, Nth-to-last (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-2',
+    locale: 'en',
+    expected: 'Every year in the 2nd-to-last week of the year',
+  },
+  {
+    name: 'BYWEEKNO other negative, Nth-to-last (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-2',
+    locale: 'ru',
+    expected: 'Каждый год на 2-й неделе с конца года',
+  },
+  {
+    name: 'BYWEEKNO three positive weeks, exercises the 3+-item join branch (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1,26,52',
+    locale: 'en',
+    expected: 'Every year in the 1st, 26th and 52nd week of the year',
+  },
+  {
+    name: 'BYWEEKNO three positive weeks, exercises the 3+-item join branch (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=1,26,52',
+    locale: 'ru',
+    expected: 'Каждый год на 1-й, 26-й и 52-й неделе года',
+  },
+  {
+    // KNOWN SIMPLIFICATION: "третий" (3rd) is the one Russian ordinal in this
+    // range whose genitive/prepositional feminine form is irregular
+    // ("третьей", not the regular "-ой"/-й shorthand pattern first/second/
+    // fourth+ follow). byweeknoPhrase always uses the uniform digit-"-й"
+    // shorthand regardless, so BYWEEKNO=3 renders as "3-й неделе" rather than
+    // the prescriptively fuller "третьей неделе". This is documented here
+    // deliberately (same spirit as the WKST note in README) rather than left
+    // as a silent gap -- a full genitive-ordinal table was judged out of
+    // scope for a first pass.
+    name: 'BYWEEKNO=3, documents the "третий" genitive-irregular simplification (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=3',
+    locale: 'ru',
+    expected: 'Каждый год на 3-й неделе года',
+  },
+  {
+    name: 'BYWEEKNO multiple negative weeks, exercises the sort comparator (en)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-1,-2',
+    locale: 'en',
+    expected: 'Every year in the last week of the year and in the 2nd-to-last week of the year',
+  },
+  {
+    name: 'BYWEEKNO multiple negative weeks, exercises the sort comparator (ru)',
+    rule: 'FREQ=YEARLY;BYWEEKNO=-1,-2',
+    locale: 'ru',
+    expected: 'Каждый год на последней неделе года и на 2-й неделе с конца года',
+  },
+  {
+    name: 'BYWEEKNO combined with a non-YEARLY freq, kept for regression parity (en)',
+    rule: 'FREQ=MONTHLY;BYWEEKNO=1',
+    locale: 'en',
+    expected: 'Every month in the 1st week of the year',
+  },
+  {
+    name: 'BYWEEKNO combined with a non-YEARLY freq, kept for regression parity (ru)',
     rule: 'FREQ=MONTHLY;BYWEEKNO=1',
     locale: 'ru',
-    expected: 'Каждый месяц (~ приблизительно)',
+    expected: 'Каждый месяц на 1-й неделе года',
+  },
+
+  // ---- BYYEARDAY and BYWEEKNO together on the same rule (en+ru) ----
+  {
+    name: 'BYYEARDAY and BYWEEKNO on the same rule (en)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1;BYWEEKNO=26',
+    locale: 'en',
+    expected: 'Every year on the 1st day of the year in the 26th week of the year',
+  },
+  {
+    name: 'BYYEARDAY and BYWEEKNO on the same rule (ru)',
+    rule: 'FREQ=YEARLY;BYYEARDAY=1;BYWEEKNO=26',
+    locale: 'ru',
+    expected: 'Каждый год 1-го дня года на 26-й неделе года',
   },
 
   // ---- 3+ nth-weekday fragments (multiple BYSETPOS x multiple BYDAY):

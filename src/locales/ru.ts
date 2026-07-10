@@ -171,6 +171,46 @@ export const ruLocale: RRuleLocale = {
     return joinWithConjunction(fragments, 'и');
   },
 
+  byyeardayPhrase(days) {
+    const positives = days.filter((d) => d > 0).sort((a, b) => a - b);
+    const negatives = days.filter((d) => d < 0).sort((a, b) => b - a);
+
+    const fragments: string[] = [];
+    if (positives.length > 0) {
+      fragments.push(
+        `${joinWithConjunction(
+          positives.map((d) => `${d}-го`),
+          'и'
+        )} дня года`
+      );
+    }
+    for (const d of negatives) {
+      if (d === -1) fragments.push('в последний день года');
+      else fragments.push(`${Math.abs(d)}-й день с конца года`);
+    }
+    return joinWithConjunction(fragments, 'и');
+  },
+
+  byweeknoPhrase(weeks) {
+    const positives = weeks.filter((w) => w > 0).sort((a, b) => a - b);
+    const negatives = weeks.filter((w) => w < 0).sort((a, b) => b - a);
+
+    const fragments: string[] = [];
+    if (positives.length > 0) {
+      fragments.push(
+        `на ${joinWithConjunction(
+          positives.map((w) => `${w}-й`),
+          'и'
+        )} неделе года`
+      );
+    }
+    for (const w of negatives) {
+      if (w === -1) fragments.push('на последней неделе года');
+      else fragments.push(`на ${Math.abs(w)}-й неделе с конца года`);
+    }
+    return joinWithConjunction(fragments, 'и');
+  },
+
   until(date: Date, dateFormatter: RRuleDateFormatter) {
     return `до ${dateFormatter(date, 'ru')}`;
   },

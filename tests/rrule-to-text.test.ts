@@ -96,6 +96,8 @@ describe('rruleToText: options', () => {
       nthWeekdayPhrase: () => 'nth',
       monthsPhrase: () => 'months',
       monthdaysPhrase: () => 'monthdays',
+      byyeardayPhrase: () => 'yeardays',
+      byweeknoPhrase: () => 'weeknos',
       until: (date, formatter) => `until ${formatter(date, '!!!not-a-real-locale!!!')}`,
       count: (n) => `count ${n}`,
       join: (parts) => parts.filter((p): p is string => !!p).join(' '),
@@ -149,13 +151,17 @@ describe('rruleToText: nth-weekday ordinal edge cases (pos < -1 and pos > 5)', (
   });
 });
 
-describe('rruleToText: BYYEARDAY / BYWEEKNO (best-effort, must not crash)', () => {
-  it('appends an approximate-match note for BYYEARDAY', () => {
-    expect(rruleToText('FREQ=YEARLY;BYYEARDAY=1,100')).toContain('~');
+describe('rruleToText: BYYEARDAY / BYWEEKNO', () => {
+  it('translates BYYEARDAY in full (en)', () => {
+    expect(rruleToText('FREQ=YEARLY;BYYEARDAY=1,100')).toBe(
+      'Every year on the 1st and 100th day of the year'
+    );
   });
 
-  it('appends an approximate-match note for BYWEEKNO', () => {
-    expect(rruleToText('FREQ=MONTHLY;BYWEEKNO=1', { locale: 'ru' })).toContain('~');
+  it('translates BYWEEKNO in full (ru)', () => {
+    expect(rruleToText('FREQ=MONTHLY;BYWEEKNO=1', { locale: 'ru' })).toBe(
+      'Каждый месяц на 1-й неделе года'
+    );
   });
 });
 

@@ -96,6 +96,12 @@ export interface RRuleLocale {
   /** e.g. "on the 1st and 15th" / "1-го и 15-го числа", "on the last day of the month" / "в последний день месяца". */
   monthdaysPhrase(days: number[]): string;
 
+  /** e.g. "on the 1st and 200th day of the year" / "1-го и 200-го дня года", "on the last day of the year" / "в последний день года". */
+  byyeardayPhrase(days: number[]): string;
+
+  /** e.g. "in the 1st and 26th week of the year" / "на 1-й и 26-й неделе года", "in the last week of the year" / "на последней неделе года". */
+  byweeknoPhrase(weeks: number[]): string;
+
   /** e.g. "until December 31, 2026" / "до 31 декабря 2026 г." */
   until(date: Date, dateFormatter: RRuleDateFormatter): string;
 

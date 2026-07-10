@@ -12,6 +12,8 @@ const blankLocale: RRuleLocale = {
   nthWeekdayPhrase: (pos, weekday) => `N${pos}W${weekday}`,
   monthsPhrase: () => '',
   monthdaysPhrase: () => '',
+  byyeardayPhrase: () => 'YEARDAY',
+  byweeknoPhrase: () => 'WEEKNO',
   until: () => '',
   count: () => '',
   join: (parts) => parts.filter((p): p is string => !!p).join(' '),
@@ -43,11 +45,19 @@ describe('buildWeekdayClause: conjunction fallback for an unrecognized locale co
   });
 });
 
-describe('APPROX_NOTE: fallback for an unrecognized locale code', () => {
-  it('defaults to the English approximate-match note', () => {
-    expect(rruleToText('FREQ=YEARLY;BYYEARDAY=1,100', { locale: 'zz-blank' })).toBe(
-      '(~ approximately)'
-    );
+describe('byyeardayPhrase / byweeknoPhrase: wired through for an unrecognized locale code', () => {
+  it('calls byyeardayPhrase for BYYEARDAY', () => {
+    expect(rruleToText('FREQ=YEARLY;BYYEARDAY=1,100', { locale: 'zz-blank' })).toBe('YEARDAY');
+  });
+
+  it('calls byweeknoPhrase for BYWEEKNO', () => {
+    expect(rruleToText('FREQ=MONTHLY;BYWEEKNO=1', { locale: 'zz-blank' })).toBe('WEEKNO');
+  });
+
+  it('calls both when a rule has both BYYEARDAY and BYWEEKNO', () => {
+    expect(
+      rruleToText('FREQ=YEARLY;BYYEARDAY=1;BYWEEKNO=26', { locale: 'zz-blank' })
+    ).toBe('YEARDAY WEEKNO');
   });
 });
 

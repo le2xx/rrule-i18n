@@ -132,7 +132,11 @@ const extractRaw = (rule: RRuleLike): RawExtraction => {
         bysetpos: toArray(orig.bysetpos) ?? null,
         byyearday: toArray(orig.byyearday) ?? null,
         byweekno: toArray(orig.byweekno) ?? null,
-        wkst: typeof orig.wkst === 'number' ? orig.wkst : null,
+        // `rrule` always parses WKST into a `Weekday` object when given as a
+        // string (never a raw number), and the field isn't surfaced in
+        // `NormalizedRule` anyway (WKST doesn't affect generated text -- see
+        // the README) -- so there's nothing meaningful to extract here.
+        wkst: null,
       },
       weekdayEntries,
     };

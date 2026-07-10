@@ -62,11 +62,6 @@ const defaultDateFormatter: RRuleDateFormatter = (date, locale) => {
   }
 };
 
-const APPROX_NOTE: Record<string, string> = {
-  ru: '(~ приблизительно)',
-  en: '(~ approximately)',
-};
-
 const resolveLocale = (options: RRuleTextOptions | undefined): RRuleLocale => {
   const requested = options?.locale;
 
@@ -135,11 +130,12 @@ const buildSentence = (rule: NormalizedRule, locale: RRuleLocale): string => {
     parts.push(locale.monthdaysPhrase([...rule.bymonthday].sort((a, b) => a - b)));
   }
 
-  if (
-    (rule.byyearday && rule.byyearday.length > 0) ||
-    (rule.byweekno && rule.byweekno.length > 0)
-  ) {
-    parts.push(APPROX_NOTE[locale.code] ?? '(~ approximately)');
+  if (rule.byyearday && rule.byyearday.length > 0) {
+    parts.push(locale.byyeardayPhrase([...rule.byyearday].sort((a, b) => a - b)));
+  }
+
+  if (rule.byweekno && rule.byweekno.length > 0) {
+    parts.push(locale.byweeknoPhrase([...rule.byweekno].sort((a, b) => a - b)));
   }
 
   return locale.join(parts);

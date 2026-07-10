@@ -50,6 +50,27 @@ const INTENTIONAL_DIFFERENCES: Record<string, string> = {
   // via multiple BYSETPOS x multiple BYDAY (a 3x3 cross product) -- rrule
   // drops all the ordinals and every weekday collapses into one plain list.
   'FREQ=MONTHLY;BYDAY=MO,WE,FR;BYSETPOS=1,2,-1': 'every month on Monday, Wednesday, Friday',
+  // rrule is terser for BYYEARDAY/BYWEEKNO ("in week 1", dropping "of the
+  // year" and pluralizing awkwardly as "weeks 1 and 26"); we spell both out
+  // in full, same "spell it out" style choice as BYMONTHDAY above.
+  'FREQ=YEARLY;BYYEARDAY=1': 'every year on the 1st day',
+  'FREQ=YEARLY;BYYEARDAY=1,100': 'every year on the 1st and 100th day',
+  'FREQ=YEARLY;BYYEARDAY=-1': 'every year on the last day',
+  'FREQ=YEARLY;BYYEARDAY=-5': 'every year on the 5th last day',
+  'FREQ=YEARLY;BYYEARDAY=1,-1': 'every year on the 1st and last day',
+  'FREQ=YEARLY;BYYEARDAY=-1,-5': 'every year on the last and 5th last day',
+  'FREQ=YEARLY;BYYEARDAY=1,50,100': 'every year on the 1st, 50th and 100th day',
+  'FREQ=YEARLY;BYWEEKNO=1': 'every year in week 1',
+  'FREQ=YEARLY;BYWEEKNO=1,26': 'every year in weeks 1 and 26',
+  'FREQ=YEARLY;BYWEEKNO=-1': 'every year in week -1',
+  'FREQ=YEARLY;BYWEEKNO=-2': 'every year in week -2',
+  'FREQ=YEARLY;BYWEEKNO=-1,-2': 'every year in weeks -1 and -2',
+  'FREQ=YEARLY;BYWEEKNO=1,26,52': 'every year in weeks 1, 26 and 52',
+  // rrule doesn't support BYWEEKNO combined with a non-YEARLY freq at all --
+  // it silently drops the clause entirely ("every month"). We always
+  // translate whatever fields are present, regardless of FREQ.
+  'FREQ=MONTHLY;BYWEEKNO=1': 'every month',
+  'FREQ=YEARLY;BYYEARDAY=1;BYWEEKNO=26': 'every year on the 1st day in week 26',
 };
 
 const lowerFirst = (text: string): string => {

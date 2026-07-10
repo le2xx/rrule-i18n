@@ -95,6 +95,40 @@ export const enLocale: RRuleLocale = {
     return joinWithConjunction(fragments, 'and');
   },
 
+  byyeardayPhrase(days) {
+    const positives = days.filter((d) => d > 0).sort((a, b) => a - b);
+    const negatives = days.filter((d) => d < 0).sort((a, b) => b - a);
+
+    const fragments: string[] = [];
+    if (positives.length > 0) {
+      fragments.push(
+        `on the ${joinWithConjunction(positives.map(ordinalEn), 'and')} day of the year`
+      );
+    }
+    for (const d of negatives) {
+      if (d === -1) fragments.push('on the last day of the year');
+      else fragments.push(`on the ${ordinalEn(Math.abs(d))}-to-last day of the year`);
+    }
+    return joinWithConjunction(fragments, 'and');
+  },
+
+  byweeknoPhrase(weeks) {
+    const positives = weeks.filter((w) => w > 0).sort((a, b) => a - b);
+    const negatives = weeks.filter((w) => w < 0).sort((a, b) => b - a);
+
+    const fragments: string[] = [];
+    if (positives.length > 0) {
+      fragments.push(
+        `in the ${joinWithConjunction(positives.map(ordinalEn), 'and')} week of the year`
+      );
+    }
+    for (const w of negatives) {
+      if (w === -1) fragments.push('in the last week of the year');
+      else fragments.push(`in the ${ordinalEn(Math.abs(w))}-to-last week of the year`);
+    }
+    return joinWithConjunction(fragments, 'and');
+  },
+
   until(date: Date, dateFormatter: RRuleDateFormatter) {
     return `until ${dateFormatter(date, 'en')}`;
   },
