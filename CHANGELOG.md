@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-10
+
 ### Added
 
 - `byyeardayPhrase` / `byweeknoPhrase` on `RRuleLocale` (breaking change to the locale interface, acceptable pre-1.0): `BYYEARDAY` and `BYWEEKNO` now render as real, grammatically-agreeing text (e.g. "on the 1st and 200th day of the year" / "1-го и 200-го дня года", "in the last week of the year" / "на последней неделе года") instead of the generic "(~ approximately)" note.
@@ -42,6 +44,7 @@ Initial release.
 - `BYYEARDAY` / `BYWEEKNO` accepted with an approximate-match note rather than silently dropped.
 - Dual ESM + CJS build via tsdown, with per-condition `.d.mts` / `.d.cts` type declarations.
 
-[Unreleased]: https://github.com/le2xx/rrule-i18n/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/le2xx/rrule-i18n/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/le2xx/rrule-i18n/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/le2xx/rrule-i18n/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/le2xx/rrule-i18n/releases/tag/v0.1.0
